@@ -10,7 +10,7 @@ const StyleLog = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3px;
+  gap: 5px;
   min-width: 100%;
   max-width: 100%;
 
@@ -20,7 +20,6 @@ const StyleLog = styled.article`
     gap: 5px;
     margin-bottom: 5px;
     width: 100%;
-    margin-bottom: 15px;
   }
 
   li {

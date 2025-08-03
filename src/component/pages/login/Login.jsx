@@ -1,6 +1,7 @@
 // import { translateText } from '../utils/translateText'; 번역기능 import
 
 import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -27,12 +28,29 @@ const StyleLogo = styled.img`
   height: auto;
   margin: 0 auto;
 `;
+
 const LoginBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 3rem;
 `;
+const CustomButton = styled.button`
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    background-color: #f7f7f7;
+  }
+`;
+
 
 const LoginFooter = styled.footer`
   max-width: 1024px;
@@ -86,11 +104,6 @@ function Login() {
   const navigate = useNavigate();
   const { setToken} = useTokenStore();
 
-  const handleLoginSuccess = (credentialResponse) => {
-      alert("임시 로그인 성공!");
-      console.log("구글 로그인 응답:", credentialResponse);
-      navigate("/main");
-  };
   // const [quote, setQuote] = useState(null);
 
   // useEffect(() => {
@@ -152,7 +165,11 @@ function Login() {
         <StyleLogo $isMobile={isMobile} className="logo" src={logo} alt="로고" />
       </LoginLogo>
       <LoginBtn>
-        <GoogleLogin ux_mode="popup" onSuccess={handleLoginSuccess} onError={() => console.log('구글 로그인 실패')} />
+        {/* <GoogleLogin ux_mode="popup" onSuccess={handleLoginSuccess} onError={() => console.log('구글 로그인 실패')} /> */}
+        <CustomButton onClick={() => navigate("/main")}>
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="google logo" width="18" />
+          Google 계정으로 로그인
+        </CustomButton>
       </LoginBtn>
       <Quote />
       <LoginFooter $isMobile={isMobile} $isTablet={isTablet}>

@@ -38,6 +38,7 @@ const StyledInputForm = styled.form`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  margin-top: 5px;
   border-radius: 8px;
   background-color: white;
   gap: 10px;
