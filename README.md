@@ -37,4 +37,6 @@ SaveIT는 저축 챌린지 기반 자산 관리 웹앱입니다.
 
 ## 📂 실제 협업 저장소
 
-팀원들과 협업한 전체 저장소
+📁 GitHub Repository  
+• Frontend: https://github.com/park-intae/SaveIT.git  
+• Backend: https://github.com/hyooniee/SaveIT.git
