@@ -1,0 +1,223 @@
+/* 공통 */
+body {
+  background-color: #F8F9FA;
+  color: #212529;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 레이아웃 구조 */
+header, main, footer {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+/* 헤더 */
+header {
+  position: relative;
+  padding: 22px 0;
+}
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  max-height: clamp(40px, 5vw, 56px);
+  height: auto;
+}
+.login {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.profile {
+  display: block;
+  height: clamp(18px, 4vw, 28px);
+}
+
+/* 메인 */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 38px;
+}
+
+/* 카드 공통 */
+.goal, .expend {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 40px 32px;
+}
+
+/* 메인 헤더 */
+.mainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+/* 좌우 카드 */
+.goal {
+  flex: 0 1 35%;
+  min-width: 300px;
+}
+.expend {
+  flex: 1;
+  min-width: 360px;
+}
+.expension {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 그래프 , AI코멘트 */
+.expLayout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+.AIcomment {
+  flex: 2;
+  min-width: 0;
+  text-align: right;
+}
+.graph {
+  flex: 1;
+  width: clamp(160px, 20vw, 200px);
+}
+
+/* 캘링더 */
+.expDetail {
+  height: 450px;
+}
+.addExp{
+  cursor: pointer;
+}
+td {
+  width: 144px;
+}
+
+/* 푸터 */
+footer {
+  border-top: 1px solid #e0e0e0;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  line-height: 1.5;
+}
+footer p{
+  padding: 10px 0;
+}
+.footRight{
+  text-align: right;
+}
+
+
+
+/*카드 텍스트*/
+.goalSummary{
+  font-size: 28px;
+  font-weight: bold;
+}
+.goalSummary span{
+  font-size: 15px;
+  font-weight: normal;
+  color: #888;
+}
+.expension{
+  font-size: 18px;
+}
+.expension span{
+  font-size: 15px;
+  color: #888;
+}
+
+
+
+
+@media (max-width: 768px) {
+  header {
+    padding: 24px 16px;
+  }
+  .logo{
+    margin-left: 0;
+    margin-right: auto;
+  }
+  .login {
+    right: 16px;
+  }
+
+  main{
+    padding: 0 16px;
+  }
+  .mainHeader {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .goal, .expend {
+    width: 100%;
+    padding: 32px 24px;
+  }
+  .expLayout {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .AIcomment {
+    width: 100%;
+    text-align: center;
+  }
+
+  footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+  }
+  footer p{
+    display: none;
+  }
+}
+
+
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  header{
+    padding: 22px 24px;
+  }
+  main {
+    padding: 0 24px;
+  }
+  .login {
+    right: 24px;
+  }
+
+  .mainHeader {
+    gap: 20px;
+  }
+  .expLayout {
+    gap: 24px;
+  }
+
+  footer{
+    padding: 24px;
+  }
+}
