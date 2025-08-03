@@ -50,8 +50,8 @@ export default function RecordSumm({ expense, save }) {
 
     return (
         <StyleSumm className="summary">
-            <p className="exspand"><span className="label">소비</span> <span className="value">₩{totalExpense}</span></p>
-            <p className="saving"><span className="label">저축</span> <span className="value">₩{totalSave}</span></p>
+            <p className="exspand"><span className="label">소비</span> <span className="value">₩ {totalExpense.toLocaleString()}</span></p>
+            <p className="saving"><span className="label">저축</span> <span className="value">₩ {totalSave.toLocaleString()}</span></p>
 
         </StyleSumm>
     )

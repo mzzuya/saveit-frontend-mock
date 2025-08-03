@@ -116,22 +116,20 @@ export default function Current() {
   // 
   const [totalSave, setTotalSave] = useState(0);
 
-  useEffect(()=> {
-      getUserSave()
-      .then((res)=> {
-            setTotalSave(res.totalSave)
-        })
-      .catch((err) => console.error("데이터 불러오기 실패", err))
-    }, [])
+  useEffect(() => {
+    const dummySave = {
+      totalSave: 250000
+    };
+    setTotalSave(dummySave.totalSave);
+  }, []);
 
 
-  useEffect(()=> {
-    getUserGoal()
-    .then((res)=> {
-          setInputGoal(res.goalAmount)
-      })
-    .catch((err) => console.error("데이터 불러오기 실패", err))
-  }, [])
+  useEffect(() => {
+    const dummyGoal = {
+      goalAmount: 500000
+    };
+    setInputGoal(dummyGoal.goalAmount);
+  }, []);
 
   // console.log(goals)
  
@@ -167,13 +165,13 @@ export default function Current() {
   // 클릭시 입력 값 전달
   const handleClick = async ()=> {
     setVisual(false)
-    try {
-        const result = await postUserGoal(inputGoal)
-        console.log("서버 응답: ", result);
-    } catch (err) {
-        console.error("에러 발생: ", err.message);
-    }
-
+    // try {
+    //     const result = await postUserGoal(inputGoal)
+    //     console.log("서버 응답: ", result);
+    // } catch (err) {
+    //     console.error("에러 발생: ", err.message);
+    // }
+    console.log("임시 저장됨:", inputGoal);
   }
 
   let saveMoney = totalSave
@@ -186,7 +184,7 @@ export default function Current() {
       <p>목표달성 현황</p>
 
       <div className="goalSummary">
-        <div className="saveMoney">{totalSave}원</div>
+        <div className="saveMoney">{Number(totalSave).toLocaleString()}원</div>
 
         <div className="money">
             <span>/</span>
@@ -208,7 +206,7 @@ export default function Current() {
                 </>
                 : 
                 <span className="moneyInput">
-                  {inputGoal}                
+                  {Number(inputGoal).toLocaleString()}             
                 </span>
             }
             

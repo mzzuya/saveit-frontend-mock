@@ -132,7 +132,7 @@ export default function RecordItem({ item, onSaveSuccess
     <StyleRecordItem
       className="RecordItem"
       kind={item.kind}
-      onDetailMode={onDetailMode}
+      $onDetailMode={onDetailMode}
       style={{
         '--labelSlide': `${labelSlide}px`,
         '--valueSlide': `${valueSlide}px`,
@@ -146,7 +146,7 @@ export default function RecordItem({ item, onSaveSuccess
             <span ref={labelRef}>{item.category}</span>
           </div>
           <div className={`Ivalue ${isValueOverflow ? 'overflowed' : ''}`}>
-            {typeof item.amount === 'number' ? `₩${item.amount}` : '데이터 없음'}
+            {typeof item.amount === 'number' ? `₩ ${item.amount.toLocaleString()}` : '데이터 없음'}
           </div>
         </>
       ) :

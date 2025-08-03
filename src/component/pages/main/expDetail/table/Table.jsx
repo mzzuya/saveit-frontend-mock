@@ -1,5 +1,5 @@
 import { ResponsiveContext } from "@context/ResponsiveContext"
-import { useContext } from "react"
+import { useContext, useMemo } from "react"
 import { addDate, getDateString } from "@utils/dateUtil";
 import { useEffect, useState } from "react";
 import TableCard from "@component/styleComponent/TableCard";
@@ -15,13 +15,45 @@ export default function Table() {
 
   const { fetchSave, fetchExpense, isLoadingExpense,
     isLoadingSave, error } = useWeeklyStore();
-  const expenseData = useWeeklyStore((state) => state.expenseData);
-  const saveData = useWeeklyStore((state) => state.saveData);
-
-  const today = getDateString(new Date()); // 오늘 날짜 확인
+  // const expenseData = useWeeklyStore((state) => state.expenseData);
+  // const saveData = useWeeklyStore((state) => state.saveData);
 
   // 날짜 기준 세팅
   const [offset, setOffset] = useState(0);
+  const today = useMemo(() => new Date(), []);
+
+  const dummyData = useMemo(() => {
+  const dates = Array.from({ length: 5 }, (_, i) => getDateString(addDate(today, i - 2 + offset)));
+    return dates.flatMap((date, i) => {
+      if (i === 0) {
+        return [
+          { date, category: "커피", amount: 3000, type: "expense" },
+          { date, category: "용돈 저축", amount: 10000, type: "save" },
+        ];
+      } else if (i === 1) {
+        return [
+          { date, category: "편의점", amount: 6000, type: "expense" },
+          { date, category: "예금", amount: 15000, type: "save" },
+        ];
+      } else if (i === 2) {
+        return [
+          { date, category: "택시비", amount: 9000, type: "expense" },
+          { date, category: "비상금 저축", amount: 5000, type: "save" },
+        ];
+      } else if (i === 3) {
+        return [
+          { date, category: "점심", amount: 7000, type: "expense" },
+          { date, category: "적금", amount: 20000, type: "save" },
+        ];
+      } else {
+        return [
+          { date, category: "용돈 저축", amount: 30000, type: "save" },
+        ];
+      }
+    });
+  }, [offset, today]);
+
+  //const today = getDateString(new Date()); // 오늘 날짜 확인
 
   // 처음 랜더링될 때 기준 상태
   const [date, setDate] = useState(() => {
@@ -38,20 +70,20 @@ export default function Table() {
   // 캘린더 비동기화
   useEffect(() => {  
 
-    const getData = async () => {
-      try {
-        await fetchExpense(offset);
-      } catch (err) {
-        console.error('지출 데이터 실패:', err);
-      }
+    // const getData = async () => {
+    //   try {
+    //     await fetchExpense(offset);
+    //   } catch (err) {
+    //     console.error('지출 데이터 실패:', err);
+    //   }
 
-      try {
-        await fetchSave(offset);
-      } catch (err) {
-        console.error('저장 데이터 실패:', err);
-      }
-    };
-    getData();
+    //   try {
+    //     await fetchSave(offset);
+    //   } catch (err) {
+    //     console.error('저장 데이터 실패:', err);
+    //   }
+    // };
+    // getData();
   }, [offset]);
 
   // 반응형 캘린더 갯수 조절
@@ -82,16 +114,18 @@ export default function Table() {
 
 
 
-  if (isLoadingExpense || isLoadingSave ) return '데이터를 불러오는 중입니다';
-  if (error) return <p>에러발생: {error}</p>;
+  // if (isLoadingExpense || isLoadingSave ) return '데이터를 불러오는 중입니다';
+  // if (error) return <p>에러발생: {error}</p>;
 
   return (
     <>
       <TableCard className="table">
         <SlipDateButton onClick={addPrevDate} dir="left"></SlipDateButton>
         {date.map((date,index) => {
-          const expenseFilter = expenseData.filter(expense => expense.expenseDate === date)
-          const saveFilter = saveData.filter(save => save.saveDate === date)
+          // const expenseFilter = expenseData.filter(expense => expense.expenseDate === date)
+          // const saveFilter = saveData.filter(save => save.saveDate === date)
+          const expenseFilter = dummyData.filter(item => item.date === date && item.type === "expense");
+          const saveFilter = dummyData.filter(item => item.date === date && item.type === "save");
 
 
           return  <TableRecord expense={expenseFilter} save={saveFilter} date={date} key={index} offset={offset}/>

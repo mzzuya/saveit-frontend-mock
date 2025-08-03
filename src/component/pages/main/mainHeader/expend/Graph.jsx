@@ -85,51 +85,82 @@ export default function Graph() {
     },
   });
   useEffect(() => {
-    axios
-      .post(
-        "/api/chart",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    const dummySeries = [50000, 30000, 20000, 15000];
+    const dummyLabels = ["식비", "교통", "문화생활", "기타"];
+    const dummyRatio = [35, 25, 15, 15];
+
+    const updatedOptions = {
+      ...state.options,
+      labels: dummyLabels,
+      tooltip: {
+        ...state.options.tooltip,
+        y: {
+          formatter: (_, options) => {
+            const percent = dummyRatio?.[options.seriesIndex] ?? 0;
+            return ` ${percent}%`;
           },
-        }
-      )
-      .then((res) => {
-        const newSeries = res.data.series;
-        const newLabels = res.data.labels;
-        const newRatio = res.data.ratio;
-        const updatedOptions = {
-          ...state.options,
-          labels: newLabels,
-          tooltip: {
-            ...state.options.tooltip,
-            y: {
-              formatter: (_, options) => {
-                //const label = newLabels?.[options.seriesIndex] ?? "";
-                const percent = newRatio?.[options.seriesIndex] ?? 0;
-                return ` ${percent}%`;
-              },
-            },
-          },
-          dataLabels: {
-            ...state.options.dataLabels,
-            formatter: (_, options) => {
-              const label = newLabels?.[options.seriesIndex] ?? "";
-              return label;
-            },
-          },
-        };
-        setState({
-          series: newSeries,
-          ratio: newRatio,
-          options: updatedOptions,
-        });
-      })
-      .catch((err) => {
-        console.log("실패:", err);
-      });
+        },
+      },
+      dataLabels: {
+        ...state.options.dataLabels,
+        formatter: (_, options) => {
+          const label = dummyLabels?.[options.seriesIndex] ?? "";
+          return label;
+        },
+      },
+    };
+
+    setState({
+      series: dummySeries,
+      ratio: dummyRatio,
+      options: updatedOptions,
+    });
+    // axios
+    //   .post(
+    //     "/api/chart",
+    //     {},
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     const newSeries = res.data.series;
+    //     const newLabels = res.data.labels;
+    //     const newRatio = res.data.ratio;
+    //     const updatedOptions = {
+    //       ...state.options,
+    //       labels: newLabels,
+    //       tooltip: {
+    //         ...state.options.tooltip,
+    //         y: {
+    //           formatter: (_, options) => {
+    //             //const label = newLabels?.[options.seriesIndex] ?? "";
+    //             const percent = newRatio?.[options.seriesIndex] ?? 0;
+    //             return ` ${percent}%`;
+    //           },
+    //         },
+    //       },
+    //       dataLabels: {
+    //         ...state.options.dataLabels,
+    //         formatter: (_, options) => {
+    //           const label = newLabels?.[options.seriesIndex] ?? "";
+    //           return label;
+    //         },
+    //       },
+    //     };
+    //     setState({
+    //       series: newSeries,
+    //       ratio: newRatio,
+    //       options: updatedOptions,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log("실패:", err);
+    //   });
   }, []);
+
   return (
     <StyleExpGraph>
       <ReactApexChart

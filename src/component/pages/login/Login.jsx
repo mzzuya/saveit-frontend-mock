@@ -85,6 +85,12 @@ function Login() {
   const { isMobile, isTablet } = useContext(ResponsiveContext);
   const navigate = useNavigate();
   const { setToken} = useTokenStore();
+
+  const handleLoginSuccess = (credentialResponse) => {
+      alert("임시 로그인 성공!");
+      console.log("구글 로그인 응답:", credentialResponse);
+      navigate("/main");
+  };
   // const [quote, setQuote] = useState(null);
 
   // useEffect(() => {
@@ -105,41 +111,40 @@ function Login() {
   // // //명언 비동기 대기
   // // if (!quote) return <p>불러오는 중...</p>;
 
-  const handleLoginSuccess = async (credentialResponse) => {
-    const idToken = credentialResponse.credential;
-    try {
-      const res = await axios.post(
-        'http://localhost:8080/auth/google',
-        { token: idToken },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-        }
-      );
+  // const handleLoginSuccess = async (credentialResponse) => {
+  //   const idToken = credentialResponse.credential;
+  //   try {
+  //     const res = await axios.post(
+  //       'http://localhost:8080/auth/google',
+  //       { token: idToken },
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         withCredentials: true,
+  //       }
+  //     );
 
-      const jwt = res.data.jwt;
-      // localStorage.setItem("jwt", jwt);
-      setToken(jwt);
-      alert('로그인 성공!');
+  //     const jwt = res.data.jwt;
+  //     // localStorage.setItem("jwt", jwt);
+  //     setToken(jwt);
+  //     alert('로그인 성공!');
 
-      const userRes = await axios.get('http://localhost:8080/user/info', {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      });
+  //     const userRes = await axios.get('http://localhost:8080/user/info', {
+  //       headers: {
+  //         Authorization: Bearer ${jwt},
+  //       },
+  //     });
 
-      console.log('로그인한 유저:', userRes.data);
-      const name = userRes.data.name;
-      localStorage.setItem('name', name);
+  //     console.log('로그인한 유저:', userRes.data);
+  //     const name = userRes.data.name;
+  //     localStorage.setItem('name', name);
 
-
-      navigate('/main'); // 페이지 이동
-    } catch (error) {
-      console.error('로그인 처리 중 에러:', error);
-    }
-  };
+  //     navigate('/main'); // 페이지 이동
+  //   } catch (error) {
+  //     console.error('로그인 처리 중 에러:', error);
+  //   }
+  // };
 
   return (
     <LoginWrapper className="LoginWrapper">

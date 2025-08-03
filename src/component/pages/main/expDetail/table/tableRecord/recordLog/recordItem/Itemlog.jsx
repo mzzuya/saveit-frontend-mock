@@ -87,6 +87,9 @@ export default function ItemLog({ setOnDetailMod, item }) {
     const [category, setCategory] = useState(item.category);
     const [amount, setAmount] = useState(item.amount);
 
+    // 더미데이터 여부 판단용
+    const isDummy = !item.id;
+
     const updateExpense = useWeeklyStore((state) => state.updateExpense);
     const updateSave = useWeeklyStore((state) => state.updateSave);
 
@@ -177,11 +180,22 @@ export default function ItemLog({ setOnDetailMod, item }) {
                 )
             }
             <ButtonGroup>
-                {isModify
-                    &&
+                {isModify &&
                     <>
-                        <button onClick={handleSave} className="edit"><img src={edit} /></button>
-                        <button onClick={handleDelete} className="delete"><img src={deleteIco} /></button>
+                        {/* <button onClick={handleSave} className="edit"><img src={edit} /></button>
+                        <button onClick={handleDelete} className="delete"><img src={deleteIco} /></button> */}
+                        <button
+                        onClick={isDummy ? () => alert("더미 데이터는 수정할 수 없어요!") : handleSave}
+                        className="edit"
+                        >
+                            <img src={edit} alt="수정" />
+                        </button>
+                        <button
+                        onClick={isDummy ? () => alert("더미 데이터는 삭제할 수 없어요!") : handleDelete}
+                        className="delete"
+                        >
+                            <img src={deleteIco} alt="삭제" />
+                        </button>
                     </>
                 }
                 <button onClick={hadleClose} className="close">

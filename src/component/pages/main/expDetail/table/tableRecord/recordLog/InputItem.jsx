@@ -86,12 +86,12 @@ const StyledInputForm = styled.form`
     }
 
     input[type="radio"]:first-of-type:checked + label {
-      background-color: #EF8479;
+      background-color: #e74c3c;
       color: white;
     }
 
     input[type="radio"]:last-of-type:checked + label {
-      background-color: #A2E1BD;
+      background-color: #27ae60;
       color: white;
     }
   }
@@ -182,31 +182,37 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef, date
   const handleAddClick =  async() => {
     setIsClosing(true);
 
-    if(kind === "" || category ==="") {
-      alert("다 채워주세요")
-    } else if (kind === "소비") {
-      try {
-        const kind = 1;
-        // const result = 
-        await postExpense(day, kind, category, amount);
-        // console.log("서버 응답: ", result);
-        fetchExpense(offset);
-      } catch (err) {
-        console.error("에러 발생: ", err.message);
-      }
-
-    } else if(kind === "저축") {
-      try {
-        const kind = 0;
-        // const result = 
-        await postSave(day, kind, category, amount);
-        // console.log("서버 응답: ", result);
-        fetchSave(offset);
-      } catch (err) {
-        console.error("에러 발생: ", err.message);
-      }
-
+    if (kind === "" || category === "" || amount === "") {
+      alert("모든 항목을 채워주세요!");
+      return;
     }
+
+    alert("현재는 더미데이터 상태로, 입력은 저장되지 않습니다.");
+    // if(kind === "" || category ==="") {
+    //   alert("다 채워주세요")
+    // } else if (kind === "소비") {
+    //   try {
+    //     const kind = 1;
+    //     // const result = 
+    //     await postExpense(day, kind, category, amount);
+    //     // console.log("서버 응답: ", result);
+    //     fetchExpense(offset);
+    //   } catch (err) {
+    //     console.error("에러 발생: ", err.message);
+    //   }
+
+    // } else if(kind === "저축") {
+    //   try {
+    //     const kind = 0;
+    //     // const result = 
+    //     await postSave(day, kind, category, amount);
+    //     // console.log("서버 응답: ", result);
+    //     fetchSave(offset);
+    //   } catch (err) {
+    //     console.error("에러 발생: ", err.message);
+    //   }
+
+    // }
 
   }
 
@@ -241,11 +247,11 @@ const InputItem = forwardRef(function InputItem({ onReqClose, exposeDomRef, date
         /> */}
       </article>
       <ButtonGroup>
-        <button type="button" onClick={handleCloseClick}>
-          <img src={close}></img>
-        </button>
         <button type="button" className="toolkit" onClick={handleAddClick}>
           <img src={add}></img>
+        </button>
+        <button type="button" onClick={handleCloseClick}>
+          <img src={close}></img>
         </button>
       </ButtonGroup>
     </StyledInputForm>
