@@ -1,14 +1,40 @@
-# saveit-frontend-mock
-팀 프로젝트 SaveIT의 프론트엔드 포트폴리오용 mock 데이터 버전
-# React + Vite
+# SaveIT - Frontend Mock
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 팀 프로젝트 SaveIT의 프론트엔드 포트폴리오용 mock 버전입니다.  
+> 실제 백엔드 없이도 UI 흐름과 주요 기능을 보여줄 수 있도록 구성했습니다.
 
-Currently, two official plugins are available:
+## 👩🏻‍💻 About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+SaveIT는 저축 챌린지 기반 자산 관리 웹앱입니다.  
+자동 저축, 소비 분석 리포트, Google 로그인 등 사용자 편의성과 실용성을 중심으로 설계했습니다.
 
-## Expanding the ESLint configuration
+> 💡 이 저장소는 포트폴리오 제출을 위한 **프론트 단독 UI 구현**용 mock 프로젝트입니다.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ⚙️ 기술 스택
+
+- React + Vite
+- Styled-components
+- Context
+- React Router DOM
+- Google OAuth
+- Figma 기반 UI 설계 반영
+
+## ✨ 주요 기능 (모형 데이터 기반)
+
+- 일일 소비/저축 목표 시각화
+- 요일별 소비 리포트 카드
+- 원형 그래프 기반 분석
+- 반응형 디자인 (PC/모바일)
+- 커스텀 Google 로그인 버튼
+
+## 🧩 역할 및 구현
+
+- Figma 시안을 기반으로 전체 디자인 반영 및 반응형 구현
+- `styled-components`로 컴포넌트 기반 스타일 구조 설계
+- `Context`를 통한 전역 상태 관리
+- Google OAuth 로그인 버튼 커스텀 및 라우팅 처리
+- 팀 프로젝트 내용을 기반으로 mock 구조화 및 정리
+
+## 📂 실제 협업 저장소
+
+팀원들과 협업한 전체 저장소
