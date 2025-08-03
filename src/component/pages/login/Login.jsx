@@ -9,6 +9,7 @@ import useTokenStore from '@stores/useTokenStore';
 import logo from "@assets/login_logo.svg";
 import { ResponsiveContext } from "@context/ResponsiveContext";
 import Quote from "./Quote";
+import { useGoogleLogin } from '@react-oauth/google';
 
 const LoginWrapper = styled.div`
   min-height: 100vh;
@@ -81,16 +82,11 @@ const FootRight = styled.div`
     padding-top: 12px;
   }
 `;
+
 function Login() {
   const { isMobile, isTablet } = useContext(ResponsiveContext);
   const navigate = useNavigate();
   const { setToken} = useTokenStore();
-
-  const handleLoginSuccess = (credentialResponse) => {
-      alert("임시 로그인 성공!");
-      console.log("구글 로그인 응답:", credentialResponse);
-      navigate("/main");
-  };
   // const [quote, setQuote] = useState(null);
 
   // useEffect(() => {
@@ -110,6 +106,18 @@ function Login() {
 
   // // //명언 비동기 대기
   // // if (!quote) return <p>불러오는 중...</p>;
+
+  const login = useGoogleLogin({
+    onSuccess: (response) => {
+      alert("임시 로그인 성공!");
+      console.log("응답:", response);
+      navigate('/main');
+    },
+    onError: () => {
+      alert("로그인 실패!");
+    },
+    flow: 'implicit',
+  });
 
   // const handleLoginSuccess = async (credentialResponse) => {
   //   const idToken = credentialResponse.credential;
@@ -132,7 +140,7 @@ function Login() {
 
   //     const userRes = await axios.get('http://localhost:8080/user/info', {
   //       headers: {
-  //         Authorization: Bearer ${jwt},
+  //         Authorization: `Bearer ${jwt}`,
   //       },
   //     });
 
@@ -140,19 +148,25 @@ function Login() {
   //     const name = userRes.data.name;
   //     localStorage.setItem('name', name);
 
+
   //     navigate('/main'); // 페이지 이동
   //   } catch (error) {
   //     console.error('로그인 처리 중 에러:', error);
   //   }
-  // };
+  //};
 
   return (
     <LoginWrapper className="LoginWrapper">
       <LoginLogo className="LoginLogo">
         <StyleLogo $isMobile={isMobile} className="logo" src={logo} alt="로고" />
       </LoginLogo>
-      <LoginBtn>
+      {/* <LoginBtn>
         <GoogleLogin ux_mode="popup" onSuccess={handleLoginSuccess} onError={() => console.log('구글 로그인 실패')} />
+      </LoginBtn> */}
+      <LoginBtn>
+        <button onClick={() => login()}>
+          Google 계정으로 로그인
+        </button>
       </LoginBtn>
       <Quote />
       <LoginFooter $isMobile={isMobile} $isTablet={isTablet}>
